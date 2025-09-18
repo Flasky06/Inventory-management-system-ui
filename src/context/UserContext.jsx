@@ -26,6 +26,10 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   // create user
   const createUser = async (userData) => {
     try {
@@ -83,11 +87,6 @@ const UserProvider = ({ children }) => {
       console.error("Error deleting user:", err);
     }
   };
-
-  // load users on mount
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   return (
     <UserContext.Provider

@@ -10,12 +10,13 @@ export default function Navigation() {
 
   const menuItems = [
     { path: "/admin-dashboard", label: "Dashboard" },
+    { path: "/user", label: "User" },
     { path: "/employee", label: "Employees" },
     { path: "/shop", label: "Shop" },
+    { path: "/category", label: "Category" },
     { path: "/product", label: "Products" },
     { path: "/workshop", label: "Workshop" },
     { path: "/profile", label: "Profile" },
-    { path: "/user", label: "User" },
   ];
 
   return (

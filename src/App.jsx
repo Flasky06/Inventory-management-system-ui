@@ -12,13 +12,19 @@ import ShopDashboard from "./pages/dashboard/ShopDashboard";
 import ShopManagement from "./pages/shop/ShopManagement";
 import ShopManagementForm from "./pages/shop/ShopManagementForm";
 import EmployeeForm from "./pages/employee/EmployeeForm";
-import UserForm from "./pages/user/UserForm";
+import UserForm from "./pages/user/UserManagementForm";
+import Category from "./pages/category/category";
+import ProductManagementForm from "./pages/product/ProductManagementForm";
+import UserManagementForm from "./pages/user/UserManagementForm";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Auth Routes */}
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+
         <Route
           path="/admin-dashboard"
           element={
@@ -29,6 +35,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        {/* Product Routes */}
         <Route
           path="/product"
           element={
@@ -37,6 +44,23 @@ const App = () => {
             </Layout>
           }
         />
+        <Route
+          path="/product/create-product"
+          element={
+            <Layout>
+              <ProductManagementForm />
+            </Layout>
+          }
+        />
+        <Route
+          path="/product/:productId"
+          element={
+            <Layout>
+              <ProductManagementForm />
+            </Layout>
+          }
+        />
+
         {/* User Routes */}
         <Route
           path="/user"
@@ -48,10 +72,19 @@ const App = () => {
         />
 
         <Route
+          path="/user/create-user"
+          element={
+            <Layout>
+              <UserManagementForm />
+            </Layout>
+          }
+        />
+
+        <Route
           path="/user/create-user/:userId"
           element={
             <Layout>
-              <UserForm />
+              <UserManagementForm />
             </Layout>
           }
         />
@@ -111,6 +144,18 @@ const App = () => {
             </Layout>
           }
         />
+
+        {/* Category Routes */}
+        <Route
+          path="/category"
+          element={
+            <Layout>
+              <Category />
+            </Layout>
+          }
+        />
+
+        {/* Workshop Routes */}
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,7 @@
 import { useShop } from "../../context/ShopContext";
 import { Link } from "react-router-dom";
 import { PencilIcon, TrashIcon, PlusIcon } from "@heroicons/react/24/outline";
+import TitleHeadComponent from "../../component/TitleHeadComponent";
 
 export default function ShopManagement() {
   const { shops, loading, deleteShop } = useShop();
@@ -9,16 +10,11 @@ export default function ShopManagement() {
 
   return (
     <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-bold">Shop Management</h1>
-        <Link
-          to="/shop/create-shop"
-          className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-        >
-          <PlusIcon className="h-5 w-5 mr-2" />
-          New Shop
-        </Link>
-      </div>
+      <TitleHeadComponent
+        pageTitle="Shop Management"
+        linkTitle="New Shop"
+        linkTo="/shop/create-shop"
+      />
 
       <table className="w-full border-collapse bg-white rounded-lg shadow-md">
         <thead>

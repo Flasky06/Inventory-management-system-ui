@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUser } from "../../context/UserContext";
 import { useNavigate, useParams } from "react-router-dom";
 
-const UserForm = () => {
+const UserManagementForm = () => {
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("USER");
   const [password, setPassword] = useState("");
@@ -16,7 +16,7 @@ const UserForm = () => {
     if (userId) {
       fetchUsers();
     }
-  }, [userId]); // only run when userId changes
+  }, [userId]);
 
   // populate form fields when users array updates
   useEffect(() => {
@@ -27,7 +27,7 @@ const UserForm = () => {
         setRole(user.role);
       }
     }
-  }, [userId, users]); // no fetchUsers here
+  }, [userId, users]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,4 +95,4 @@ const UserForm = () => {
   );
 };
 
-export default UserForm;
+export default UserManagementForm;
