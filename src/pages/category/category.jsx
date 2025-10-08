@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCategory } from "../../context/CategoryContext";
 import { Link } from "react-router-dom";
 import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import TitleHeadComponent from "../../component/TitleHeadComponent";
+import TitleHeadComponent from "../../components/common/TitleHeader";
 
 const Category = () => {
   const {
@@ -78,21 +78,25 @@ const Category = () => {
           {categories.map((category) => (
             <tr key={category.id} className="hover:bg-gray-50">
               <td className="p-3 border-b">{category.name}</td>
-              <td className="p-3 border-b text-center flex justify-center gap-3">
-                <button
-                  onClick={() => startEdit(category)}
-                  className="text-blue-600 hover:text-blue-800"
-                  type="button"
-                >
-                  <PencilIcon className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={() => deleteCategory(category.id)}
-                  className="text-red-600 hover:text-red-800"
-                  type="button"
-                >
-                  <TrashIcon className="h-5 w-5" />
-                </button>
+              <td className="p-3 border-b text-center">
+                <div className="flex justify-center gap-2">
+                  <button
+                    onClick={() => startEdit(category)}
+                    className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm"
+                    type="button"
+                  >
+                    <PencilIcon className="h-4 w-4" />
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => deleteCategory(category.id)}
+                    className="flex items-center gap-1 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm"
+                    type="button"
+                  >
+                    <TrashIcon className="h-4 w-4" />
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

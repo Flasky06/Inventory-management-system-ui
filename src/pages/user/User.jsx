@@ -1,10 +1,12 @@
 import React from "react";
 import { useUser } from "../../context/UserContext";
 import { Link } from "react-router-dom";
-import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useShop } from "../../context/ShopContext";
 
 const User = () => {
   const { users, loading, deleteUser } = useUser();
+  const { shops } = useShop();
 
   if (loading) return <p className="p-4">Loading users...</p>;
   return (
@@ -32,20 +34,29 @@ const User = () => {
           {users.map((user) => (
             <tr key={user.id} className="hover:bg-gray-50">
               <td className="p-3 border-b">{user.username}</td>
-              <td className="p-3 border-b">{user.role}</td>
-              <td className="p-3 border-b text-center flex justify-center gap-3">
-                <Link
-                  to={`/user/create-user/${user.id}`}
-                  className="text-blue-600 hover:text-blue-800"
-                >
-                  <PencilIcon className="h-5 w-5" />
-                </Link>
-                <button
-                  onClick={() => deleteUser(user.id)}
-                  className="text-red-600 hover:text-red-800"
-                >
-                  <TrashIcon className="h-5 w-5" />
-                </button>
+              <td className="p-3 border-b">
+                {user.role}
+                {user.shopId
+                  ? ` - ${shops.find((shop) => shop.id === user.shopId)?.name}`
+                  : ""}
+              </td>
+              <td className="p-3 border-b text-center">
+                <div className="flex justify-center gap-2">
+                  <Link
+                    to={`/user/create-user/${user.id}`}
+                    className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm"
+                  >
+                    <PencilIcon className="h-4 w-4" />
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => deleteUser(user.id)}
+                    className="flex items-center gap-1 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm"
+                  >
+                    <TrashIcon className="h-4 w-4" />
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

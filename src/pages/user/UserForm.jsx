@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../../context/UserContext";
 import { useNavigate, useParams } from "react-router-dom";
+import { useShop } from "../../context/ShopContext";
 
 const UserManagementForm = () => {
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("USER");
   const [password, setPassword] = useState("");
+  const [shopId, setShopId] = useState("");
+
+  const { shops } = useShop();
 
   const { createUser, updateUser, users, fetchUsers } = useUser();
   const navigate = useNavigate();
@@ -33,9 +37,9 @@ const UserManagementForm = () => {
     e.preventDefault();
 
     if (userId) {
-      await updateUser(userId, { username, role, password });
+      await updateUser(userId, { username, role, password, shopId });
     } else {
-      await createUser({ username, role, password });
+      await createUser({ username, role, password, shopId });
     }
 
     navigate("/user");
@@ -82,6 +86,23 @@ const UserManagementForm = () => {
             className="w-full border rounded-lg px-3 py-2"
             required={!userId} // required only when creating
           />
+        </div>
+
+        <div>
+          <label>Shop</label>
+          <select
+            value={shopId}
+            onChange={(e) => setShopId(e.target.value)}
+            className="w-full border rounded p-2"
+            required
+          >
+            <option value="">Select a shop</option>
+            {shops.map((shop) => (
+              <option key={shop.id} value={shop.id}>
+                {shop.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         <button

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useShop } from "../../context/ShopContext";
 
-export default function ShopManagementForm() {
+export default function WorkshopManagementForm() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [shopType, setShopType] = useState("WORKSHOP");
@@ -13,12 +13,12 @@ export default function ShopManagementForm() {
   // Fetch shops when editing
   useEffect(() => {
     if (id) {
-      fetchShops(); 
-      const shop = shops.find((s) => s.id === id);
-      if (shop) {
-        setName(shop.name);
-        setLocation(shop.location);
-        setShopType(shop.shopType);
+      fetchShops();
+      const workshop = shops.find((s) => s.id === id);
+      if (workshop) {
+        setName(workshop.name);
+        setLocation(workshop.location);
+        setShopType(workshop.shopType);
       }
     }
   }, [id, shops, fetchShops]);
@@ -30,13 +30,13 @@ export default function ShopManagementForm() {
     } else {
       await createShop({ name, location, shopType });
     }
-    navigate("/shop");
+    navigate("/workshop");
   };
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-xl font-bold mb-4">
-        {id ? "Edit Shop" : "Create New Shop"}
+        {id ? "Edit Workshop" : "Create New Workshop"}
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -62,14 +62,16 @@ export default function ShopManagementForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Shop Type</label>
+          <label className="block text-sm font-medium mb-1">
+            Workshop Type
+          </label>
           <select
             value={shopType}
             onChange={(e) => setShopType(e.target.value)}
             className="w-full border rounded-lg px-3 py-2"
+            disabled
           >
             <option value="WORKSHOP">Workshop</option>
-            <option value="RETAIL">Retail</option>
           </select>
         </div>
 
@@ -77,7 +79,7 @@ export default function ShopManagementForm() {
           type="submit"
           className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
         >
-          {id ? "Update Shop" : "Save Shop"}
+          {id ? "Update Workshop" : "Save Workshop"}
         </button>
       </form>
     </div>

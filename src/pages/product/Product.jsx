@@ -1,19 +1,19 @@
 import React from "react";
-import TitleHeadComponent from "../../component/TitleHeadComponent";
+import TitleHeader from "../../components/common/TitleHeader";
 import { useProduct } from "../../context/ProductContext";
 import { Link } from "react-router-dom";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useCategory } from "../../context/CategoryContext";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 const Product = () => {
-  const { products, loading } = useProduct();
+  const { products, loading, deleteProduct } = useProduct(); // <-- include deleteProduct
+  const { categories } = useCategory();
 
   if (loading) return <p className="p-4">Loading products...</p>;
 
-  const { categories } = useCategory();
   return (
     <div>
-      <TitleHeadComponent
+      <TitleHeader
         title="Products"
         pageTitle="Product Management"
         linkTitle="New Product Page"
@@ -47,25 +47,29 @@ const Product = () => {
               </td>
               <td className="p-3 border-b">{product.price}</td>
 
-              <td className="p-3 border-b text-center flex justify-center gap-3">
-                <Link
-                  to={`/product/${product.id}`}
-                  className="text-blue-600 hover:text-blue-800"
-                >
-                  <PencilIcon className="h-5 w-5" />
-                </Link>
-                <button
-                  onClick={() => deleteProduct(product.id)}
-                  className="text-red-600 hover:text-red-800"
-                >
-                  <TrashIcon className="h-5 w-5" />
-                </button>
+              <td className="p-3 border-b text-center">
+                <div className="flex justify-center gap-2">
+                  <Link
+                    to={`/product/${product.id}`}
+                    className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm"
+                  >
+                    <PencilIcon className="h-4 w-4" />
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => deleteProduct(product.id)}
+                    className="flex items-center gap-1 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm"
+                  >
+                    <TrashIcon className="h-4 w-4" />
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
           {products.length === 0 && (
             <tr>
-              <td colSpan="4" className="text-center p-4 text-gray-500">
+              <td colSpan="8" className="text-center p-4 text-gray-500">
                 No products found
               </td>
             </tr>

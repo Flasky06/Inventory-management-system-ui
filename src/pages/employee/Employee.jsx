@@ -1,13 +1,12 @@
 import React from "react";
 import { useEmployee } from "../../context/EmployeeContext";
 import { Link } from "react-router-dom";
-import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 export default function Employee() {
   const { employees, loading, deleteEmployee } = useEmployee();
 
   if (loading) return <p className="p-4">Loading employees...</p>;
-
 
   return (
     <div className="p-6">
@@ -45,19 +44,23 @@ export default function Employee() {
               <td className="p-3 border-b">{employee.phoneNo}</td>
               <td className="p-3 border-b">{employee.dob}</td>
               <td className="p-3 border-b">{employee.shopName}</td>
-              <td className="p-3 border-b text-center flex justify-center gap-3">
-                <Link
-                  to={`/employee/${employee.id}`}
-                  className="text-blue-600 hover:text-blue-800"
-                >
-                  <PencilIcon className="h-5 w-5" />
-                </Link>
-                <button
-                  onClick={() => deleteEmployee(employee.id)}
-                  className="text-red-600 hover:text-red-800"
-                >
-                  <TrashIcon className="h-5 w-5" />
-                </button>
+              <td className="p-3 border-b text-center">
+                <div className="flex justify-center gap-2">
+                  <Link
+                    to={`/employee/${employee.id}`}
+                    className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm"
+                  >
+                    <PencilIcon className="h-4 w-4" />
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => deleteEmployee(employee.id)}
+                    className="flex items-center gap-1 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm"
+                  >
+                    <TrashIcon className="h-4 w-4" />
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
