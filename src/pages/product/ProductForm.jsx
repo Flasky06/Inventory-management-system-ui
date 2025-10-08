@@ -57,20 +57,36 @@ const ProductManagementForm = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-xl font-semibold mb-4">
+    <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-xl font-semibold mb-6">
         {id ? "Edit Product" : "Create Product"}
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">Name</label>
-          <input
-            type="text"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            className="w-full border rounded p-2"
-            required
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Name</label>
+            <input
+              type="text"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+              placeholder="Enter product name"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Price</label>
+            <input
+              type="number"
+              step="0.01"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+              placeholder="0.00"
+            />
+          </div>
         </div>
 
         <div>
@@ -78,58 +94,53 @@ const ProductManagementForm = () => {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full border rounded p-2"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="3"
+            placeholder="Enter product description"
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Material</label>
-          <input
-            type="text"
-            value={material}
-            onChange={(e) => setMaterial(e.target.value)}
-            className="w-full border rounded p-2"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Material</label>
+            <input
+              type="text"
+              value={material}
+              onChange={(e) => setMaterial(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g. Wood, Metal"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Color</label>
+            <input
+              type="text"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g. Brown, Blue"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Size</label>
+            <input
+              type="text"
+              value={size}
+              onChange={(e) => setSize(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g. 10x20x30 cm"
+            />
+          </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Color</label>
-          <input
-            type="text"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-            className="w-full border rounded p-2"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Size</label>
-          <input
-            type="text"
-            value={size}
-            onChange={(e) => setSize(e.target.value)}
-            className="w-full border rounded p-2"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Price</label>
-          <input
-            type="number"
-            step="0.01"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            className="w-full border rounded p-2"
-            required
-          />
-        </div>
-
-        <div>
+        <div className="max-w-xs">
           <label className="block text-sm font-medium mb-1">Category</label>
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className="w-full border rounded p-2"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
             <option value="">Select a category</option>
@@ -141,12 +152,21 @@ const ProductManagementForm = () => {
           </select>
         </div>
 
-        <button
-          type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-        >
-          {id ? "Update Product" : "Create Product"}
-        </button>
+        <div className="flex gap-3 pt-4">
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium"
+          >
+            {id ? "Update Product" : "Create Product"}
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/product")}
+            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded text-sm font-medium"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

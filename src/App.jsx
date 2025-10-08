@@ -12,6 +12,7 @@ import ShopManagement from "./pages/shop/ShopManagement";
 import ShopForm from "./pages/shop/ShopForm";
 import EmployeeForm from "./pages/employee/EmployeeForm";
 import Category from "./pages/category/Category";
+import CategoryForm from "./pages/category/CategoryForm";
 import ProductForm from "./pages/product/ProductForm";
 import UserForm from "./pages/user/UserForm";
 import Dispatch from "./pages/dispatch/Dispatch";
@@ -239,6 +240,26 @@ const App = () => {
             <ProtectedRoute allowedRoles={["ADMIN", "CEO", "WORKSHOP_MANAGER"]}>
               <Layout>
                 <Category />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category/create-category"
+          element={
+            <ProtectedRoute allowedRoles={["ADMIN", "CEO", "WORKSHOP_MANAGER"]}>
+              <Layout>
+                <CategoryForm />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category/:id"
+          element={
+            <ProtectedRoute allowedRoles={["ADMIN", "CEO", "WORKSHOP_MANAGER"]}>
+              <Layout>
+                <CategoryForm />
               </Layout>
             </ProtectedRoute>
           }

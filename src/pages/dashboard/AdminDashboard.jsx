@@ -179,7 +179,7 @@ const AdminDashboard = () => {
           {dispatches.slice(0, 5).map((dispatch) => (
             <div
               key={dispatch.id}
-              className="flex items-center justify-between p-3 bg-gray-50 rounded"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 bg-gray-50 rounded gap-2"
             >
               <div>
                 <p className="font-medium">{dispatch.dispatchReference}</p>
@@ -187,7 +187,7 @@ const AdminDashboard = () => {
                   {dispatch.sourceShopName} → {dispatch.destinationShopName}
                 </p>
               </div>
-              <div className="text-right">
+              <div className="sm:text-right">
                 <span
                   className={`px-2 py-1 text-xs font-semibold rounded ${
                     dispatch.status === "PENDING"
@@ -199,7 +199,7 @@ const AdminDashboard = () => {
                 >
                   {dispatch.status}
                 </span>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-gray-500 sm:mt-1 mt-2">
                   {new Date(dispatch.createdAt).toLocaleDateString()}
                 </p>
               </div>

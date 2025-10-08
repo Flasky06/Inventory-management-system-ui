@@ -138,7 +138,7 @@ export default function Navigation() {
   return (
     <>
       {/* Desktop */}
-      <aside className="hidden md:flex flex-col fixed top-0 left-0 w-64 h-screen bg-slate-800 text-gray-200 p-6">
+      <aside className="hidden lg:flex flex-col fixed top-0 left-0 w-64 h-screen bg-slate-800 text-gray-200 p-6">
         <h2 className="text-2xl font-bold mb-8 text-gray-100">MyApp</h2>
         <nav className="flex-1 space-y-2">
           {menuItems.map((item) => renderMenuItem(item))}
@@ -163,7 +163,7 @@ export default function Navigation() {
       </aside>
 
       {/* Mobile topbar */}
-      <nav className="md:hidden fixed top-0 left-0 w-full bg-slate-800 text-gray-100 px-4 py-3 flex justify-between items-center z-50">
+      <nav className="lg:hidden fixed top-0 left-0 w-full bg-slate-800 text-gray-100 px-4 py-3 flex justify-between items-center z-50">
         <h2 className="text-lg font-bold">MyApp</h2>
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
@@ -176,7 +176,7 @@ export default function Navigation() {
 
       {/* Mobile dropdown */}
       {isOpen && (
-        <div className="md:hidden fixed top-12 right-0 w-[90%] h-[80vh] bg-slate-700 text-gray-200 shadow-lg p-4 space-y-2 z-40 overflow-y-auto">
+        <div className="lg:hidden fixed top-12 left-0 w-full h-[80vh] bg-slate-700 text-gray-200 shadow-lg p-4 space-y-2 z-40 overflow-y-auto">
           {menuItems.map((item) => renderMenuItem(item))}
           {user ? (
             <button

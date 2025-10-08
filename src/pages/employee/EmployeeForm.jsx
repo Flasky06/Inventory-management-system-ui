@@ -54,113 +54,130 @@ const EmployeeForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white shadow rounded-lg p-6">
-      <h2 className="text-xl font-bold mb-4">
-        {employeeId ? "Edit Employee" : "Create New Employee"}
+    <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-xl font-semibold mb-6">
+        {employeeId ? "Edit Employee" : "Create Employee"}
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">Full Name</label>
-          <input
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-            required
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Full Name</label>
+            <input
+              type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+              placeholder="Enter full name"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Phone Number
+            </label>
+            <input
+              type="text"
+              value={phoneNo}
+              onChange={(e) => setPhoneNo(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+              placeholder="+254712345678"
+            />
+          </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Role</label>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">ID Number</label>
+            <input
+              type="text"
+              value={idNo}
+              onChange={(e) => setIdNo(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+              placeholder="Enter ID number"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Date of Birth
+            </label>
+            <input
+              type="date"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Role</label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="">Select role</option>
+              <option value="CEO">CEO</option>
+              <option value="WORKSHOP_MANAGER">Workshop Manager</option>
+              <option value="SHOP_MANAGER">Shop Manager</option>
+              <option value="EMPLOYEE">Employee</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Gender</label>
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="">Select gender</option>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Shop Assignment
+            </label>
+            <select
+              value={shopId}
+              onChange={(e) => setShopId(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">No shop assignment</option>
+              {shops.map((shop) => (
+                <option key={shop.id} value={shop.id}>
+                  {shop.name} ({shop.shopType})
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="flex gap-3 pt-4">
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium"
           >
-            <option value="">SELECT ROLE</option>
-            <option value="CEO">CEO</option>
-            <option value="WORKSHOP_MANAGER">Workshop Manager</option>
-            <option value="SHOP_MANAGER">Shop Manager</option>
-            <option value="EMPLOYEE">Employee</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Gender</label>
-          <select
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-          >
-            <option value="">SELECT GENDER</option>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Phone No</label>
-          <input
-            type="text"
-            value={phoneNo}
-            onChange={(e) => setPhoneNo(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Id No</label>
-          <input
-            type="text"
-            value={idNo}
-            onChange={(e) => setIdNo(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">DOB</label>
-          <input
-            type="date"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Shop</label>
-          <select
-            value={shopId}
-            onChange={(e) => setShopId(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-          >
-            <option value="">SELECT SHOP</option>
-            {shops.map((shop) => (
-              <option key={shop.id} value={shop.id}>
-                {shop.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="flex gap-4">
+            {employeeId ? "Update Employee" : "Create Employee"}
+          </button>
           <button
             type="button"
             onClick={() => navigate("/employee")}
-            className="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded text-sm font-medium"
           >
             Cancel
-          </button>
-          <button
-            type="submit"
-            className="flex-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
-          >
-            {employeeId ? "Update Employee" : "Save Employee"}
           </button>
         </div>
       </form>

@@ -34,19 +34,20 @@ export default function ShopManagementForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-xl font-bold mb-4">
-        {id ? "Edit Shop" : "Create New Shop"}
+    <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-xl font-semibold mb-6">
+        {id ? "Edit Shop" : "Create Shop"}
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Name</label>
+          <label className="block text-sm font-medium mb-1">Shop Name</label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
+            placeholder="Enter shop name"
           />
         </div>
 
@@ -56,8 +57,9 @@ export default function ShopManagementForm() {
             type="text"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
+            placeholder="Enter shop location"
           />
         </div>
 
@@ -66,20 +68,30 @@ export default function ShopManagementForm() {
           <select
             value={shopType}
             onChange={(e) => setShopType(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           >
-            <option>Select Shop Type</option>
-            <option value="WORKSHOP">Workshop</option>
+            <option value="">Select shop type</option>
             <option value="RETAIL">Retail</option>
+            <option value="WORKSHOP">Workshop</option>
           </select>
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-        >
-          {id ? "Update Shop" : "Save Shop"}
-        </button>
+        <div className="flex gap-3 pt-4">
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium"
+          >
+            {id ? "Update Shop" : "Create Shop"}
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/shop")}
+            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded text-sm font-medium"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

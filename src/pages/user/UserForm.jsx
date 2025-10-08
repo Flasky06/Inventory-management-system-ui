@@ -46,9 +46,9 @@ const UserManagementForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-xl font-bold mb-4">
-        {userId ? "Edit User" : "Create New User"}
+    <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-xl font-semibold mb-6">
+        {userId ? "Edit User" : "Create User"}
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -57,8 +57,9 @@ const UserManagementForm = () => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
+            placeholder="Enter username"
           />
         </div>
 
@@ -67,50 +68,67 @@ const UserManagementForm = () => {
           <select
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           >
             <option value="ADMIN">Admin</option>
             <option value="CEO">CEO</option>
             <option value="WORKSHOP_MANAGER">Workshop Manager</option>
             <option value="SHOP_MANAGER">Shop Manager</option>
             <option value="EMPLOYEE">Employee</option>
+            <option value="USER">User</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Password</label>
+          <label className="block text-sm font-medium mb-1">
+            Password {!userId && "(required)"}
+          </label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-            required={!userId} // required only when creating
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required={!userId}
+            placeholder={
+              userId ? "Leave blank to keep current" : "Enter password"
+            }
           />
         </div>
 
         <div>
-          <label>Shop</label>
+          <label className="block text-sm font-medium mb-1">
+            Shop Assignment
+          </label>
           <select
             value={shopId}
             onChange={(e) => setShopId(e.target.value)}
-            className="w-full border rounded p-2"
-            required
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">Select a shop</option>
+            <option value="">No shop assignment</option>
             {shops.map((shop) => (
               <option key={shop.id} value={shop.id}>
-                {shop.name}
+                {shop.name} ({shop.shopType})
               </option>
             ))}
           </select>
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-        >
-          {userId ? "Update User" : "Save User"}
-        </button>
+        <div className="flex gap-3 pt-4">
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium"
+          >
+            {userId ? "Update User" : "Create User"}
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/user")}
+            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded text-sm font-medium"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
